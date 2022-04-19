@@ -1,0 +1,1310 @@
+mecanismo de: api-json.json
+llamada a abrir openapi, en código spaghetti
+	nombre de la api: API de las declaraciones de los servidores públicos
+	versión
+llamada a documentación externa: /api_docs
+llamada a servidores: url
+rutas
+	ruta de la versión 2
+		se postea
+			etiquetas
+				"declaraciones"
+			resumen
+				"muestra las declaraciones de los servidores públicos permitiendo búsquedas avanzadas"
+			id de operación
+				"post_declaraciones"
+			llamada a cuerpo
+				descripción: "JSON para peticiones de búsqueda avanzada"
+				contenido
+					aplicación json
+						esquema
+							ruta->componentes>esquemas>reqDeclaraciones
+				cuerpo: verdadero
+			respuestas
+				200: operación exitosa
+				contenido
+					aplicación json
+						esquema
+							ruta->componentes>esquemas>resDeclaraciones
+				400: página inválida
+				contenido
+					aplicación json
+						esquema 
+							ruta->componentes>esquemas>resError
+				401: no tienes permisos
+				contenido
+					aplicación json
+						esquema 
+							ruta->componentes>esquemas>resError
+				default: unexpected error
+				contenido
+					aplicación json
+						esquema 
+							ruta->componentes>esquemas>resError
+			seguridad
+				autorización de las declaraciones: leer declaraciones
+		componentes
+			esquemas
+				resDeclaraciones
+					paginación 
+					resultados
+				propiedades
+					paginación
+						tiene siguiente página
+						página
+						tamaño de página
+						total de flechas
+						propiedades
+							tamaño de página
+								mínimo
+								descripción: tamaño de registros mostrados por página. Por defecto son 10
+							página
+								mínimo
+								descripcioón: número de página actual
+							total de flechas
+								descripción: total de registros
+							tiene siguiente página
+								descripción: indica si hay otra página
+					resultados
+						declaración
+						id
+						metadata
+						propiedades
+							id
+								descripción: identificador de la declaración
+							metadata
+								actualización
+								institución
+								tipo
+								propiedades
+									actualización
+										descripción: fecha y hora en la que se presentó la declaración
+									institución
+										descripción: nombre de la institución
+									tipo
+										descripción: indica el tipo de declaración
+										inicial 
+										modificación
+										conclusión
+							declaración
+								situacionPatrimonial //esta api es sólo para la situación patrimonial
+								propiedades
+									situacionPatrimonial
+									//NUEVO CÓDIGO TIENE TODO DECLARADO
+										datosCurricularesDeclarante
+										datosEmpleoCargoComision
+										datosGenerales
+										experienciaLaboral
+										ingresos
+										propiedades //llenado de datos
+											datosGenerales
+											domicilioDeclarante
+											datosCurricularesDeclarante
+											datosEmpleoCargoComision
+											experienciaLaboral
+											datosPareja
+											datosDependienteEconomico
+											ingresos
+											bienesInmuebles
+											vehiculos
+											bienesMuebles
+											inversiones
+											adeudos
+											prestamoOComodato //error de escritura
+											//ERROR DE ESCRITURA CORREGIDO EN NUEVO CÓDIGO
+									interes
+									propiedades
+										participacion
+										participacionTomaDecisiones
+										apoyos
+										representacion
+										clientesPrincipales
+										beneficiosPrivados
+										fideicomisos
+				reqDeclaraciones
+				propiedades
+					pagina
+						descripción: número de página
+					tamaño de página
+						descripción: número de registros a mostrar por página, el máximo permitido es 200 y mínimo 1
+					"sort"
+					propiedades
+						nombres
+						primerApellido
+						segundoApellido
+						escolaridadNivel
+						datosEmpleoCargoComision
+							propiedades
+								nombreEntePublico
+								entidadFederativa
+								municipioAlcaldia
+								empleoCargoComision
+								nivelEmpleoCargoComision
+								nivelOrdenGobierno
+						totalIngresosNetos: 
+							descripción: ordenamiento sobre los datos de ingresoMensualNetoDeclarante (INICIAL), ingresoAnualNetoDeclarante (MODIFICACIÓN), ingresoConclusionNetoDeclarante (CONCLUSIÓN) 
+							// valores de enum[] no descritos antes 
+							asc
+							desc
+						bienesInmuebles
+						propiedades
+							superficieConstruccion
+							superficieTerreno
+							formaAdquisicion
+							valorAdquisicion
+					"query"
+					propiedades
+						id
+							descripción: devuelve resultados al buscar una declaración por su ID. Si se especifica este valor, el objeto query es omitido
+						nombres
+							descripción: nombre de la persona
+						primerApellido
+							descripción: primer apellido de la persona
+						segundoApellido
+							descripción: segundo apellido de la persona
+						escolaridadNivel //aquí sí se explican las claves
+							descripción: PRI (PRImaria), SEC (SECundaria), BCH (BaCHillerato), CTC (Carrera Técnica o Comercial), LIC (LICenciatura), ESP (ESPecialidad), MAE (MAEstria), DOC (DOCtorado)
+						datosEmpleoCargoComision
+						propiedades
+							nombreEntePublico
+								descripción: se deberá señalar el Ente Público o entidad que corresponda en la que el Servidor Público Declarante ejerza el encargo
+							entidadFederativa
+								descripción: clave de la entidad federativa del Marco Geoestadístico Nacional
+							municipioAlcaldia
+								descripción: clave de municipio del Marco Geoestadístico Nacional
+							empleoCargoComision
+								descripción: empleo, cargo o comisión. Señalar el nombre del empleo, cargo o comisión, nombramiento, contrato u oficio de comisión
+							nivelOrdenGobierno
+								descripción: código del nivel/orden de gobierno a buscar
+								FEDERAL
+								ESTATAL
+								MUNICIPAL_ALCALDIA
+							nivelEmpleoCargoComision
+								descripción: nivel del empleo, cargo o comisiónn
+						bienesInmuebles
+						propiedades
+							superficieConstruccion
+							propiedades
+								min: valor mínimo de búsqueda, si sólo existe este dato se buscarán todos los datos igual o superior al valor
+								max: valor máximo de búsqueda, si sólo existe este dato se buscarán todos los datos igual o menor al valor
+								descripción: se deberá señalar en metros cuadrados con valor numérico la superficie correspondiente a construcción respecto del bien inmueble que se declare
+							superficieTerreno
+							propiedades
+								min: // //
+								max: // //
+								descripción: // //
+							formaAdquisicion
+								descripción: CPV (ComPra Venta), CSN (CeSióN), DNC (DoNaCión), HRN (HeReNcia), PRM (PeRMuta), RST (Rifa o SorTeo), STC (SenTenCia)
+							valorAdquisicion
+							propiedades
+								min: // //
+								max: // //
+								descripción: valor numérico del precio de adquisición
+						totalIngresosNetos
+						propiedades
+							min: // //
+							max: // // 
+							descripción: búsqueda de los datos de ingresoMensualNetoDeclarante (INICIAL), ingresoAnualNetoDeclarante (MODIFICACIÓN), ingresoConclusionNetoDeclarante (CONCLUSIÓN) 
+						rfcSolicitante
+							descripción: RFC de la persona quien hace la consulta, si se omite este parámetro, se enviarán sólo los datos públicos
+				resError
+				propiedades
+					código: código alfa numérico del error de la consulta
+					mensaje: texto descriptivo para el usuario final del error en la consulta
+					descripción: estos valores son definidos por el sistema del API
+				ordenamiento
+					descripción: campo a ordenar de forma ascendente (asc), o descendente (desc)
+					asc
+					desc
+				datosGenerales
+				//pedida de datos incompletos
+				propiedades
+					nombre
+					// //
+					primerApellido
+					// //
+					segundoApellido
+					// //
+					curp
+						descripción: escribir los 18 caracteres como la emitió la Secretaría de Gobernación. En caso de no contar con ella, podrá consultarla en la página de la Secretaría de Gobernación, en el apartado de trámites
+					rfc
+					propiedades
+						rfc
+							descripción: registro federal de contribuyentes
+						homoclave
+							descripción: homoclave
+					correoElectronico
+					propiedades
+						institucional
+							descripción: escribir la dirección de correo electrónico que le haya sido asignada por el Ente Público en el que labora
+						personal
+							descripción: escribir la dirección de correo electrónico que el Declarante haya generado para uso personal. En caso de no contar con él, deberá generar una cuenta.
+					telefono
+					propiedades
+						casa
+							descripción: número telefónico de su domicilio, incluyendo lada
+						celularPersonal
+							descripción: los 10 dígitos de su número celular
+					situacionPersonalEstadoCivil
+					propiedades
+						clave: SOL(SOLtero), CAS (CASado), DIV (DIVorciado), VIU (VIUdo), CON (CONcubina, CONcubinario, unión libre), SCO (Sociedad de COnvivencia)
+							SOL
+							CAS
+							DIV
+							VIU
+							CON
+							SCO
+						Valor: es la condición del Declarante en función de si tiene o no pareja, según sus circunstancias o situación legal respecto a ello
+							soltero
+							casado
+							divorciado
+							viudo
+							concubina, concubinario, unión libre
+							sociedad de convivencia
+					reginmenMatrimonial
+					propiedades
+						clave: SOC (SOCiedad conyugal), SBI (Separación de BIenes), OTR (OTRo)
+							SOC
+							SBI
+							OTR
+						valor: en su caso, especificar: sociedad conyugal, separación de bienes, otro
+							//falta el enum[]
+							//ENUM[] PUESTO EN EL NUEVO CÓDIGO
+							sociedad conyugal
+							separación de bienes
+							otro
+					paisNacimiento
+					nacionalidad
+					aclaracionesObservaciones
+				domicilioDeclarante
+				propiedades
+					domicilioMexico
+					domicilioExtranjero
+					aclaracionesObservaciones
+				datosCurricularesDeclarante
+				// require //QUIZÁ REQUIERA MÁS COSAS, ES UN ARREGLO DENTRO DE UN ARREGLO
+				{
+				"tipoOperacion",
+				"institucionEducativa",
+				"carreraAreaConocimiento",
+				"estatus",
+				"documentoObtenido",
+				"fechaObtencion",
+				"aclaracionesObservaciones"
+				}
+				propiedades
+					escolaridad
+					propiedades
+						tipoOperacion
+						nivel
+							propiedades
+								clave: PRI (PRImaria), SEC (SECundaria), BCH (BaCHillerato), CTC (Carrera Técnica o Comercial), LIC (LICenciatura), ESP (ESPecialidad), MAE (MAEstria), DOC (DOCtorado)
+									PRI
+									SEC
+									BCH
+									CTC
+									LIC
+									ESP
+									MAE
+									DOC
+								valor: indicar el nombre del nivel
+									primaria
+									secundaria
+									bachillerato
+									carrera ténica o comercial
+									licenciatura
+									especialidad
+									maestria
+									doctorado
+							descripción: el declarante deberá elegir alguna de las siguientes opciones: primaria, secundaria, bachillerato, carrera técnica o comercial, licenciatura, especialidad, maestría, doctorado
+						institucionEducativa
+						propiedades
+							nombre
+								descripción: institución educativa, escribir el nombre de la institución educativa donde se realizaron los estudios
+							ubicación: 
+								descripción: señalar si se ubica en México o en el extranjero
+						carreraAreaConocimiento
+							descripción: nombre de la carrera de los estudios realizados
+						estatus
+							descripción: seleccionar si se encuentra cursando los estudios, finalizado o trunco
+							cursando
+							finalizado
+							trunco
+						documentoObtenido
+							boleta
+							certificado
+							constancia
+							titulo
+						fechaObtención
+							descripción: señalar la fecha que indica el documento obtenido
+					aclaracionesObservaciones
+				datosEmpleoCargoComision
+				// require: empleoCargoComision, nombreEntePublico
+				propiedades
+					tipoOperacion
+					nivelOrdenGobierno
+					ambitoPublico
+					nombreEntePublico
+						descripción: señalar el Ente Público al cual se encuentra adscrita la plaza
+					areaAdscripcion
+						descripción: especificar el nombre de la unidad administrativa u homóloga superior inmediata de su adscripción (superior jerarquico)
+					empleoCargoComision
+						descripción: señalar el nomre del empleo, cargo o comisión que aparece en su recibo de nómina, nombramiento, contrato u oficio de comisión
+					contratadoPorHonorarios
+						descripción: sí o no
+					nivelEmpleocargoComision
+						descripción: elegir conforme a lo que señala su recibo de pago, en caso de no encontrarse en la lista desplegable, señalar otro y especificar
+					funcionPrincipal
+						descripción: señalar cuál es la unción o actividad principal que desempeña en su empleo, cargo o comisión
+					fechaTomaPosesion
+						descripción: señalar la fecha en que inició/concluyó el encargo
+					telefonoOficina
+					propiedades
+						telefono
+							descripción: proporcionar el telefono laboaral y extensión según corresponda
+						extensión
+							// // 
+					domicilioMexico
+					domicilioExtranjero
+					aclaracionesObservaciones
+					cuentaConOtroCargoPublico
+						descripción: cuenta con otro empleo, cargo, comisión en el servicio público distinto al declarado
+					otroEmpleoCargoComision
+				
+					empleoCargoComision
+				experienciaLaboral
+				// required ninguno //MISMA SITUACION ARREGLO DENTRO DE ARREGLO
+				propiedades
+					ninguno
+					experiencia
+						items
+							anyOf
+							propiedades
+								tipoOperacion
+								nivelOrdenGobierno
+								ambitoPublico
+								nombreEntePublico
+									descripción: señalar el Ente Público al cual se encuentra adscrita la plaza
+								areaAdscripcion
+									descripción: especificar el nombre de la unidad administrativa u homóloga superior inmediata de su adscripción (superior jerarquico)
+								empleoCargoComision
+									descripción: señalar el nomre del empleo, cargo o comisión que aparece en su recibo de nómina, nombramiento, contrato u oficio de comisión
+								funcionPrincipal
+									descripción: señalar cuál es la unción o actividad principal que desempeña en su empleo, cargo o comisión
+								fechaIngreso
+									descripción: señalar la fecha en que inició empleo, cargo o comisión
+								fechaEgreso
+									descripción: señalar la fecha en que concluyó empleo, cargo o comisión
+								ubicacion
+									descripción: señalar en México o en el extranjero
+									MX
+									EX
+							propiedades
+								tipoOperacion
+								ambitoSector
+								nombreEmpresaSociedadAsociacion
+									descripción: proporcionar el nombre de la empresa, sociedad o asociación en la que laboro
+								rfc
+									descripción: proporcionar los 12 dígitos de la empresa en que laboro
+								area
+									descripción: proporcionar el nombre del área en la cual estaba adscrito(A)
+								puesto
+									descripción: proporcionar el nombre del puesto que desempeño
+								sector
+								fechaIngreso
+									descripción: señalar la fecha en que inició empleo, cargo o comisión
+								fechaEgreso
+									descripción: señalar la fecha en que concluyó empleo, cargo o comisión
+								ubicacion
+									descripción: señalar en México o en el extranjero
+									MX
+									EX
+					aclaracionesObservaciones
+				datosPareja
+				propiedades
+					ninguno
+					tipoOperacion
+					nombre
+					primerApellido
+					segundoApellido
+					fechaNacimiento
+					rfc
+					relacionConDeclarante
+						descripción: seleccionar el tipo de relación entre las opciones: conyugue, concubina_concubinario_union_libre, sociedad_convivencia
+						CONYUGUE
+						CONCUBINA_CONCUBINARIO_UNION_LIBRE
+						SOCIEDAD_DE_CONVIVENCIA
+					ciudadanoExtranjero
+						descripción: deberá indicar si o no, según el caso
+					curp
+					esDependienteEconomico
+						descripción: si la manutención depende principalmente de los ingresos de la persona servidora pública Declarante, señalará si, en caso contrario señalará no
+					habitaDomicilioDeclarante
+						descripción: indicar si o no, la pareja vive en el domicilio del Declarante
+					lugarDondeReside
+					domicilioMexico
+					domicilioExtranjero
+					actividadLaboral
+					actividadLaborarlSectorPublico
+						propiedades
+							nivelOrdenGobierno
+							ambitoPublico
+							nombreEntePublico
+								descripción: señalar el Ente Público al cual se encuentra adscrita la plaza
+							areaAdscripcion
+								descripción: especificar el nombre de la unidad administrativa u homóloga superior inmediata de su adscripción (superior jerarquico)
+							empleoCargoComision
+								descripción: señalar el nomre del empleo, cargo o comisión que aparece en su recibo de nómina, nombramiento, contrato u oficio de comisión
+							funcionPrincipal
+								descripción: señalar cuál es la unción o actividad principal que desempeña en su empleo, cargo o comisión
+							salarioMensualNeto
+							fechaIngreso
+								descripción: señalar la fecha en que inició empleo, cargo o comisión
+					actividadLaboralSectorPrivadoOtro
+						propiedades
+							nombreEmpresaSociedadAsociacion
+								descripción: proporcionar el nombre de la empresa, sociedad o asociación en la que labora
+							empleoCargoComision
+								descripción: proporcionar el nombre del puesto que desempeña
+							rfc
+								descripción: proporcionar los 12 dígitos de la empresa en que labora su conyugue
+							fechaIngreso
+								descripción: señalar la fecha en que inició empleo, cargo o comisión
+							sector
+							salarioMensualNeto
+							proveedorContratistaGobierno
+								descripción: señalar si o no, la pareja vende o presta algún servicio al gobierno
+					aclaracionesObservaciones
+				datosDependientesEconomicos
+				propiedades
+					ninguno
+					dependienteEconomico
+						descripción: llenar toda la información por cada una de las personas que dependan económicamente del Declarante
+						items
+						propiedades
+							tipoOperacion
+							nombre
+							primerApellido
+							segundoApellido
+							fechaNacimiento
+							rfc
+							parentescoRelacion
+							extranjero
+							curp
+							habitaDomicilioDeclarante
+							lugarDondeReside
+								MEXICO
+								EXTRANJERO
+								SE_DESCONOCE
+							domicilioMexico
+							domicilioExtranjero
+							actividadLaboral
+							actividadLaboralSectorPublico
+							propiedades
+								nivelOrdenGobierno
+								ambitoPublico
+								nombreEntePublico
+									descripción: señalar el Ente Público al cual se encuentra adscrita la plaza
+								areaAdscripcion
+									descripción: especificar el nombre de la unidad administrativa u homóloga superior inmediata de su adscripción (superior jerarquico)
+								empleoCargoComision
+									descripción: señalar el nomre del empleo, cargo o comisión que aparece en su recibo de nómina, nombramiento, contrato u oficio de comisión
+								funcionPrincipal
+									descripción: señalar cuál es la unción o actividad principal que desempeña en su empleo, cargo o comisión
+								salarioMensualNeto
+								fechaIngreso
+									descripción: el dependiente sigue trabajando ahí
+							actividadLaboralSectorPrivadoOtro
+							propiedades
+								nombreEmpresaSociedadAsociación
+								rfc
+								empleoCargo //aquí quizá sea empleoCargoComision //NO ES PÚBLICO POR LO TANTO ESTÁ BIEN	
+								fechaIngreso
+								salarioMensualNeto
+							proveedorContratistaGobierno
+							sector
+						aclaracionesObservaciones
+					descripción: proporcionar los datos de los dependientes económicos, que son aquellas personas, familiares o no, cuya manutención depende principalmente de los ingresos del Declarante
+				ingresos
+					ingresoanualNetoDeclarante
+					remuneracionAnualCargoPublico
+					totalIngresosAnualesNetos
+					propiedades
+						remuneracionAnualCargoPublico
+						otrosIngresosAnualesTotal
+						actividadIndustrialEmpresarial
+						propiedades
+							remuneracionTotal
+							actividades
+								items
+								propiedades
+									remuneracion
+									nombreRazonSocial
+										descripción: nombre, razón social, o denominaciónn del negocio, en el cual se lleva a cabo la actividad o alguna de las actividades antes mencionadas por la cual se genera el ingreso
+									tipoNegocio
+										descripción: tipo de negocio por el cual obtuvo el ingreso
+						actividadFinanciera
+						propiedades
+							remuneracionTotal
+							actividades
+							propiedades
+								remuneracion
+								tipoInstrumento
+						serviciosProfesionales
+						propiedades
+							remuneracionTotal
+							servicios
+							propiedades
+								remuneracion
+								tipoServicio
+									descripción: tipo de servicio que otorga, el tipo de participación en los consejos o consultorías, así como el tipo de asesorías que llevó a cabo
+						enajenacionBienes
+						propiedades
+							remuneracionTotal
+							bienes
+							propiedades
+								remuneracion
+								tipoBienEnajenado
+									MUEBLE
+									INMUEBLE
+									VEHICULO
+						otrosIngresos
+						propiedades
+							remuneracionTotal
+							ingresos
+							propiedades
+								remuneracion
+								tipoIngreso
+									descripción: indicar si el ingreso derivó de arrendamiento, regalía, sorteos, concursos, donaciones, seguro de vida o algún otro concepto distinto no considerado en los rubros anteriores
+						ingresoAnualNetoDeclarante
+						ingresoAnualNetoParejaDependiente
+						totalIngresosAnualesNetos
+						aclaracionesObservaciones
+					descripción: para la declaración de modificación los ingresos a reportar son los del año inmediato anterior (como se señala en el título del 1 de enero al 31 de diciembre del año inmediato anterior)
+				bienesInmuebles
+				propiedades
+					ninguno
+					bienInmueble
+						descripción: llenar toda la información de cada uno de los bienes que conforme a la normatividad aplicable se consideran inmuebles
+					propiedades
+						tipoOperacion
+						tipoInmueble
+						titular
+						porcentajePropiedad
+							maximo
+							minimo
+							tipo*
+						superficieTerreno
+						superficieConstruccion
+						tercero
+						transmisor
+						formaAdquisicion
+						formaPago
+						valorAdquisicion
+						formaPago
+						valorAdquisicion
+						fechaAdquisicion
+							descripción: formato yyyymmdd
+						datoIdentificacion
+						valorConformeA
+							descripción: número de escritura pública, folio real o cualquier dato que lo identifique
+							ESCRITURA PÚBLICA
+							SENTENCIA
+							CONTRATO
+						domicilioMexico
+						domicilioExtranjero
+						motivoBaja
+					descripción: reportar aquellos bienes que cocnforme a la normatividad aplicable se consideran inmuebles
+				vehiculos
+				propiedades
+					ninguno
+					vehiculo
+						descripción: datos del vehículo declarado
+						propiedades
+							tipoOperacion
+							tipoVehiculo
+							titular
+							transmisor
+							marca
+							modelo
+							anio //anotación de esa manera porque "ñ" 
+							numeroSerieRegistro
+							tercero
+							lugarRegistro
+							propiedades
+								pais
+								entidadFederativa
+							formaAdquisicion
+							formaPago
+							valorAdquisicion
+							fechaAdquisicion
+							motivoBaja
+					aclaracionesObservaciones
+					descripción: situación de los vehículos a la fecha de ingreso al empleo, cargo o comisión 
+				bienesMuebles
+				propiedades
+					ninguno
+					bienMueble
+					propiedades
+						tipoOperacion
+						titular
+						tipoBien
+						propiedades
+							clave
+								descripción: MECA (MEnaje de CAsa [muebles y accesorios de casa]), APAE (APAratos Electrónicos y electrodomésticos), JOYA (JOYAs), COLEC (COLECciones), OBRA (OBRAs de arte), OTRO (OTROs, especificar)
+								MECA
+								APAE
+								JOYA
+								COLEC
+								OBRA
+								OTRO
+							valor
+								//analizar más a detalle la estructura de código y rutas, para ver si es necesario ligar o enlistar las claves con su valor, posiblemente falta un enum[]
+							descripción: seleccionar de la lista desplegable: menaje de casa (muebles y accesorios de casa), aparatos electrónicos y electrodomésticos, joyas, colecciones, obras de arte, otros
+						transmisor
+						tercero
+						descripcionGeneralBien
+							descripción: referir brevemente el bien reportado
+						formaAdquisicion
+						formaPago
+						valorAdquisicion
+						fechaAdquisicion
+						motivoBaja
+					aclaracionesObservaciones
+				inversionesCuentasValores
+				propiedades
+					inversion
+					propiedades
+						tipoOperacion
+						tipoInversion
+						propiedades
+							clave: BANC (BANCaria), FINV (Fondos de INVersión), ORPM (ORganizaciones Privadas y/o Mercantiles), POMM (POsesión de Monedas y/o Metales, SEGR (SEGuRos), VBUR (Valores BURsátiles), AFOT (AFOres y oTros)
+					
+								BANC
+								FINV
+								ORPM
+								POMM
+								SEGR
+								VBUR
+								AFOT
+							valor
+								BANCARIA
+								FONDOS DE INVERSIÓN
+								ORGANIZACIONES PRIVADAS Y/O MERCANTILES
+								POSESIÓN DE MONEDAS Y/O METALES
+								SEGUROS
+								VALORES BURSÁTILES
+								AFORES Y OTROS
+						subTipoInversion
+						propiedades //en esta descripción las claves se desglozan de manera más descriptiva
+							clave: *tipoInversion-clave-valor, * BANC - `CNOM` - CUENTA DE NÓMINA\n  * BANC - `CAHO` - CUENTA DE AHORRO\n  * BANC - `CCHE` - CUENTA DE CHEQUES\n  * BANC - `CMAS` - CUENTA MAESTRA\n  * BANC - `CEJE` - CUENTA EJE\n  * BANC - `DPLA` - DEPÓSITO A PLAZOS\n  \n  * FINV - `SOIN` - SOCIEDADES DE INVERSIÓN\n  * FINV - `IFEX` - INVERSIONES FINANCIERAS EN EL EXTRANJERO\n  \n  * ORPM - `ACCI` - ACCIONES\n  * ORPM - `CSAH` - CAJAS DE AHORRO\n  \n  * POMM - `CENT` - CENTENARIOS\n  * POMM - `DIVS` - DIVISAS\n  * POMM - `MONN` - MONEDA NACIONAL\n  * POMM - `ONZT` - ONZAS TROY\n  * POMM - `CRIP` - CRIPTOMONEDAS\n  \n  * SEGR - `SSIN` - SEGURO DE SEPARACIÓN INDIVIDUALIZADO\n  * SEGR - `SEGI` - SEGURO DE INVERSIÓN\n  * SEGR - `SEGV` - SEGURO DE VIDA\n  \n  * VBUR - `ADER` - ACCIONES Y DERIVADOS\n  * VBUR - `ABAN` - ACEPTACIONES BANCARIAS\n  * VBUR - `BGUB` - BONOS GUBERNAMENTALES\n  * VBUR - `PCOM` - PAPEL COMERCIAL\n  \n  * AFOT - `AFOR` - AFORES\n  * AFOT - `FIDE` - FIDEICOMISOS\n  * AFOT - `CTES` - CERTIFICADOS DE LA TESORERÍA\n  * AFOT - `PFTE` - PRÉSTAMOS A FAVOR DE UN TERCERO\n
+								CNOM
+								CAHO
+								CCHE
+								CMAS
+								CEJE
+								DPLA
+								SOIN
+								IFEX
+								ACCI
+								CSAH
+								CENT
+								DIVS
+								MONN
+								ONZT
+								CRIP
+								SSIN
+								SEGI
+								SEGV
+								ADER
+								ABAN
+								BGUB
+								PCOM
+								AFOR
+								FIDE
+								CTES
+								PFTE
+							valor
+								CUENTA DE NÓMINA
+								CUENTA DE AHORRO
+								CUENTA DE CHEQUES
+								CUENTA MAESTRA
+								CUENTA EJE
+								DEPÓSITO A PLAZOS
+								SOCIEDADES DE INVERSIÓN
+								INVERSIONES FINANCIERAS EN EL EXTRANJERO
+								ACCIONES
+								CAJAS DE AHORRO
+								CENTENARIOS
+								DIVISAS
+								MONEDA NACIONAL
+								ONZAS TROY
+								CRIPTOMONEDAS
+								SEGURO DE SEPARACIÓN INDIVIDUALIZADO
+								SEGURO DE INVERSIÓN 
+								SEGURO DE VIDA
+								ACCIONES Y DERIVADOS
+								ACEPTACIONES BANCARIAS
+								BONOS GUBERNAMENTALES
+								PAPEL COMERCIAL
+								AFORES
+								FIDEICOMISOS
+								CERTIFICADOS DE LA TESORERÍA
+								PRÉSTAMOS A FAVOR DE UN TERCERO
+						titular
+						tercero
+						numeroCeuntaContrato
+						localizacionInversion
+						propiedades
+							institucionRazonSocial
+								descripción: señalar el nombre de la instirutción donde se encuentran registradas las inversiones cuentas o valores
+							rfc
+							descripción: indicar si se encuentra en México o en el extranjero, debiendo señalar el país donde se localiza
+						saldoDiciembreAnterior
+						porcentajeIncrementoDecremento
+							maximo
+							minimo
+							tipo
+								descripción: porcentaje de incremento(+) o decremento (-) del saldo
+					aclaracionesObservaciones
+				adeudosPasivos
+				propiedades	
+					ninguno
+					adeudo
+					propiedades
+						tipoOperacion
+						titular
+						tipoAdeudo
+						propiedades
+							clave: * `CHIP` - CRÉDITO HIPOTECARIO \n  * `CAUT` - CRÉDITO AUTOMOTRIZ\n  * `CPER` - CRÉDITO PERSONAL\n  * `TCRN` - TARJETA DE CRÉDITO BANCARIA\n  * `TCRD` - TARJETA DE CRÉDITO DEPARTAMENTAL\n  * `PRPE` - PRÉSTAMO PERSONAL\n  * `OTRO` - OTROS (ESPECIFIQUE)\n
+								CHIP
+								CAUT
+								CPER
+								TCRN
+								TCRD
+								PRPE
+							valor
+							// nuevamente revisar a detalle el código, falta enum[]
+						numeroCuentaContrato
+							descripción: señalar el número de contrato, cuenta o cualquier dato que permita su identificación, en caso de préstamo personal se indicará no aplica
+						fechaAdquisición
+							descripción: indicar la fecha en que adquirió el adeudo
+						montoOriginal
+						saldoInsolutoDiciembreAnterior
+						porcentajeIncrementoDecremento
+							maximo
+							minimo
+							*tipo
+								descripción: porcentaje de incremento (+) o decremento (-) del saldo
+						tercero
+						otorganteCredito
+						propiedades
+							tipoPersona
+							nombreINstitucion
+								descripción: señalar el nombre de la institución donde contra la deuda
+							rfc
+							localizacionAdeudo
+							propiedades
+								pais
+								descripción: indicar si se encuentra en México o en el extranjero, debiendo señalar el país donde se localiza
+					aclaracionesObservaciones
+				prestamoComodato
+				propiedades
+					ninguno
+					prestamo
+					propiedades
+						tipoOperacion
+						tipoBien
+						propiedades
+							inmueble
+							propiedades
+								tipoInmueble
+								domicilioMexico
+								domicilioExtranjero
+								descripción: elegir alguna de las siguientes opciones: casa, departamento, edificio, local comercial, bodega, palco, rancho, terreno, otro (especificar)
+							vehiculo
+							propiedades
+								tipo
+								marca
+									descripción: del catálogo desplegable
+								modelo
+								anio
+								numeroSerieRegistro
+								lugarRegistro
+								propiedades
+									pais
+									entidadFederativa
+						duenoTitular
+						propiedades
+							tipoDuenoTitular
+							nombreTitular
+							rfc
+							relacionConTitular
+					aclaracionesObservaciones
+				participacion
+				propiedades
+					ninguno
+					participacion
+					propiedades
+						tipoOperacion
+						tipoRelacion
+						nombreEmpresaSociedadAsociacion
+						rfc
+						porcentajeParticipacion
+							maximo
+							minimo
+							*tipo
+							descripción: porcentaje de participación en la empresa, socidad o asociación
+						tipoParticipación
+						recibeRemuneracion
+						montoMensual
+						ubicacion
+						propiedades
+							pais
+							entidadFederativa
+						sector
+					aclaracionesObservaciones
+				participacionTomaDecisiones
+				propiedades
+					ninguno
+					participacion
+					propiedades
+						tipoOperacion
+						tipoRelacion
+						tipoIntitucion
+						propiedades
+							clave: * `OSC` - ORGANIZACIONES DE LA SOCIEDAD CIVIL\n  * `OB` - ORGANIZACIONES BENÉFICAS\n  * `PP` - PARTIDOS POLÍTICOS\n  * `GS` - GREMIOS/SINDICATOS\n  * `OTRO` - OTRO (ESPECIFIQUE)\n
+								OSC
+								OB
+								PP
+								GS
+								OTRO
+							valor
+							//nuevamente revisar código falta enum[]
+							descripción: tipo de institución, señalar del catálogo, alguna de las siguientes: organizaciones de la sociedad civil, organizaciones benéficas, partidos políticos, gremios/sindicatos, otro, especifique
+						nombreInstitucion
+						rfc
+						puestoRol
+						fechaInicioParticipacion
+						recibeRemuneracion
+						montoMensual
+						ubicacion
+					descripción: tiene o no participación en empresas, sociedades o asociaciones, tales como socio, acconista, comisario, representante, apoderaro, colaborador, beneficiario u otro, especificar. reportar hasta los últimos dos años
+				apoyos
+				propiedades
+					ninguno
+					apoyo
+					propiedades
+						tipoOperacion
+						tipoPersona
+						beneficiarioPrograma
+						nombrePrograma
+						institucionOtorgante
+						nivelOrdenGobierno
+						tipoApoyo
+						propiedades
+							clave: * `SUB` - SUBSIDIO\n* `SER` - SERVICIO\n* `OBRA` - OBRA\n* `OTRO` - OTRO (ESPECIFIQUE)\n
+								SUB
+								SER
+								OBRA
+								OTRO
+							valor
+							//verificar hace falta enum[]
+							descripción: Tipo de apoyo. Seleccionar del listado desplegable: subsidio (Ayuda económica que una persona recibe de un organismo oficial para satisfacer una necesidad determinada), servicio (Actividad o asistencia de un Ente Público, en favor del Declarante), Obra (materiales o servicios a favor del Declarante para construcción), otro, especifique.
+						formaRecepcion
+						montoApoyoMensual
+						especifiqueApoyo
+					aclaracionesObservaciones
+					descripción: s la contribución monetaria o en especie que otorga un Ente Público al Declarante, cónyuge o Pareja y/o dependiente económico. El apoyo en especie refiere a cualquier contribución, utilizando bienes, servicios o beneficios de naturaleza diferente al dinero. Deberá reportar hasta los últimos dos años.
+				representaciones
+				propiedades
+					ninguno
+					representacion
+					propiedades
+						tipoOperacion
+						tipoRelacion
+						tipoRepresentacion
+							REPRESENTANTE
+							REPRESENTADO
+						fechaInicioRepresentacion
+						tipoPersona
+						nombreRazonSocial
+						rfc
+						recibeRemuneracion
+						montoMensual
+						ubicacion
+						sector
+					aclaracionesObservaciones
+					descripción: Es cuando el Declarante actúa a nombre de otra persona física o moral (representante) o cuando una persona actúa a nombre del Declarante (representado). Deberá reportar hasta los últimos dos años.
+				clientesPrincipales
+				propiedades
+					ninguno
+					cliente
+					propiedades
+						tipoOperacion
+						realizaActividadLucrativa
+						tipoRelacion
+						empresa
+						propiedades
+							nombreEmpresaSErvicio
+							rfc
+						clientePrincipal
+						propiedades
+							tipoPersona
+							nombreRazonSocial
+							rfc
+						sector
+						montoAproximadoGanancia
+						ubicacion
+					aclaracionesObservaciones
+					descripción: En caso de tener alguna empresa, negocio o actividad lucrativa deberá señalar a sus clientes principales, siempre y cuando el beneficio o ganancia directa al Declarante supere mensualmente 250 Unidades de Medida y Actualización (UMA), refiriéndose al valor diario de ésta. Deberá reportar hasta los últimos dos años.
+				beneficiosPrivados
+				propiedades
+					ninguno
+					beneficio
+					propiedades
+						tipoOperacion
+						tipoPersona
+						tipoBeneficio
+						propiedades
+							clave: * `S` - SORTEO\n  * `C` - CONCURSO\n  * `D` - DONACIÓN\n  * `O` - OTRO (ESPECIFICO)\n
+								S
+								C
+								D
+								O
+							valor
+							//revisar, falta enum[]
+							descripción: Tipo de Beneficio. Seleccionar del listado el tipo de beneficio sorteo, concurso, donación u otro (especifique)
+						beneficiario
+						otorgante
+						propiedades
+							tipoPersona
+							nombreRazonSocial
+							rfc
+						formaRecepcion
+						especifiqueBeneficio
+						montoMensualAproximado
+						sector
+					aclaracionesObservaciones
+					descripción: Es la contribución monetaria o en especie que otorga una persona física o moral con recursos privados al Declarante o alguna de las personas señaladas en el catálogo. El apoyo en especie refiere a cualquier contribución, utilizando bienes o beneficios de naturaleza diferente al dinero. Deberá reportar hasta los últimos dos años.
+				fideicomisos
+				propiedades
+					ninguno
+					fideicomiso
+					propiedades
+						tipoOperacion
+						tipoRelacion
+						tipoFideicomiso
+							PUBLICO
+							PRIVADO
+							MIXTO
+						tipoParticipacion
+							FIDEICOMITENTE
+							FIDUCIARIO
+							FIDEICOMISARIO
+							COMITE_TECNICO
+						rfcFideicomiso
+						fideicomitente
+						propiedades
+							tipoPersona
+							nombreRazonSocial
+							rfc
+						fiduciario
+						propiedades
+							nombreRazonSocial
+							rfc
+						fideicomisario
+						propiedades
+							tipoPersona
+							nombreRazonSocial
+							rfc
+						sector
+						extranjero
+							MX
+							EX
+					aclaracionesObservaciones
+					descripción: Este apartado solo lo llenaran las personas servidoras públicas que tengan participación en un fideicomiso, ya sea en el carácter de fideicomitente, fiduciario, fideicomisario o dentro del consejo técnico. Deberá reportar hasta los últimos dos años.
+				domicilioMexico
+				propiedades
+					calle
+					numeroExterior
+					numeroInterior
+					coloniaLocalidad
+					municipioAlcaldia
+					propiedades //Marco Geoestadístico del INEGI
+						clave
+						valor
+					entidadFederativa
+					codigoPostal
+				domicilioExtranjero
+				propiedades
+					calle
+					numeroExterior
+					numeroInterior
+					ciudadLocalidad
+					estadoProvincia
+					pais
+					codigoPostal
+				tipoPersona
+					FISICA
+					MORAL
+				tipoMoneda
+				formaRecepcion
+					MONETARIO
+					ESPECIE
+				tipoRelacion
+				entidadFederativa
+				propiedades //MarcoGeostadístico de la Inegi
+					clave
+					valor
+				pais
+				beneficiariosPrograma
+				propiedades
+					clave: * `DC` - DECLARANTE\n  * `CY` - CÓNYUGE\n  * `CON` - CONCUBINA O CONCUBINARIO\n  * `CONV` - CONVIVIENTE\n  * `HIJ` - HIJO(A)\n  * `HER` - HERMANO(A)\n  * `CU` - CUÑADO(A)\n  * `MA` - MADRE\n  * `PA` - PADRE\n  * `TIO` - TÍO(A)\n  * `PRI` - PRIMO(A)\n  * `SOB` - SOBRINO(A)\n  * `AHI` - AHIJADO(A)\n  * `NUE` - NUERA\n  * `YER` - YERNO\n  * `ABU` - ABUELO(A)\n  * `NIE` - NIETO(A)\n  * `OTRO` - OTRO(A)\n
+						DC
+						CY
+						CON
+						CONV
+						HIJ
+						HER
+						CU
+						MA
+						PA
+						TIO
+						PRI
+						SOB
+						AHI
+						NUE
+						YER
+						ABU
+						NIE
+						OTRO
+					valor
+					//revisar falta enum[]
+				sector
+				propiedades
+					clave: * `AGRI` - AGRICULTURA\n  * `MIN` - MINERÍA\n  * `EELECT` - ENERGÍA ELÉCTRICA\n  * `CONS` - CONSTRUCCIÓN\n  * `INDMANU` - INDUSTRIA MANUFACTURERA\n  * `CMAYOR` - COMERCIO AL POR MAYOR\n  * `CMENOR` - COMERCIO AL POR MENOR\n  * `TRANS` - TRANSPORTE\n  * `MEDIOM` - MEDIOS MASIVOS\n  * `SERVFIN` - SERVICIOS FINANCIEROS\n  * `SERVINM` - SERVICIOS INMOBILIARIOS\n  * `SERVPROF` - SERVICIOS PROFESIONALES\n  * `SERVCORP` - SERVICIOS CORPORATIVOS\n  * `SERVS` - SERVICIOS DE SALUD\n  * `SERVESPAR` - SERVICIOS DE ESPARCIMIENTO\n  * `SERVALOJ` - SERVICIOS DE ALOJAMIENTO\n  * `OTRO` - OTRO (ESPECIFIQUE)\n
+						AGRI
+						MIN
+						EELECT
+						CONS
+						INDMANU
+						CMAYOR
+						CMENOR
+						TRANS
+						MEDIOM
+						SERVFIN
+						SERVINM
+						SERVPROF
+						SERVCORP
+						SERVS
+						SERVESPAR
+						SERVALOJ
+						OTRO
+					valor
+					//revisar falta enum[]
+				monto
+				propiedades
+					valor
+					moneda
+				superficie
+				propiedades
+					valor
+					unidad
+				unidadMedida
+					descripción: * `m2 ` - METRO CUADRADO\n  * `ha ` - HECTÁREA\n  * `km2 ` - KILÓMETRO CUADRADO\n
+					m2
+					ha
+					km2
+				tipoInstrumento
+				propiedades
+					clave: * `CAP` - CAPITAL\n  * `FIN` - FONDOS DE INVERSIÓN\n  * `OPR` - ORGANIZACIONES PRIVADA\n  * `SSI` - SEGURO DE SEPARACIÓN INDIVIDUALIZADO\n  * `VBU` - VALORES BURSÁTILES\n  * `BON` - BONOS\n  * `OTRO` - OTRO(ESPECIFIQUE)\n
+						CAP
+						FIN
+						OPR
+						SSI
+						VBU
+						BON
+						OTRO
+					valor
+					//revisar falta enum[] //LÍNEA 3025
+				tipoInmueble
+				propiedades
+					clave: * `CASA` - CASA\n  * `DPTO` - DEPARTAMENTO\n  * `EDIF` - EDIFICIO\n  * `LOCC` - LOCAL COMERCIAL\n  * `BODG` - BODEGA\n  * `PALC` - PALCO\n  * `RACH` - RANCHO\n  * `TERR` - TERRENO\n  * `OTRO` - OTROS (ESPECIFIQUE)\n
+						CASA
+						DPTO
+						EDIF
+						LOCC
+						BODG
+						PALC
+						RACH
+						TERR
+						OTRO
+					valor
+					//revisar falta enum[]
+				parentescoRelacion
+				propiedades
+					clave: * `ABU` - ABUELO(A)\n  * `BISA` - BISABUELO(A)\n  * `BISN` - BISNIETO(A)\n  * `CONB` - CONCUBINA O CONCUBINARIO\n  * `CONC` - CONCUÑO(A)\n  * `CONY` - CÓNYUGE\n  * `CUN` - CUÑADO(A)\n  * `HER` - HERMANO(A)\n  * `HIJ` - HIJO(A)\n  * `MAD` - MADRE\n  * `PAD` - PADRE\n  * `PRI` - PRIMO(A)\n  * `SOB` - SOBRINO(A)\n  * `SUE` - SUEGRO(A)\n  * `TATA` - TATARABUELO(A)\n  * `TATN` - TATARANIETO(A)\n  * `TIOA` - TIO(A)\n  * `NIE` - NIETO(A)\n  * `NIN` - NINGUNO\n  * `AHI` - AHIJADO(A)\n  * `NUE` - NUERA\n  * `YER` - YERNO\n  * `OTRO` - OTRO(ESPECIFIQUE)\n
+						ABU
+						BISA
+						BISN
+						CONB
+						CONC
+						CONY
+						CUN
+						HER
+						HIJ
+						MAD
+						PAD
+						PRI
+						SOB
+						SUE
+						TATA
+						TATN
+						TIOA
+						NIE
+						NIN
+						AHI
+						NUE
+						YER
+						OTRO
+					valor
+					//revisar falta enum[]
+					descripción: tipo de relación con el Declarante
+				actividadLaboral
+				propiedades
+					clave: * `PUB` - PUBLICO\n  * `PRI` - PRIVADO\n  * `OTRO` - OTRO(ESPECIFIQUE)\n  * `NIN` - NINGUNO\n
+						PUB
+						PRI
+						OTRO
+						NIN
+					valor
+					//revisar falta enum[]
+				formaAdquisicion
+				propiedades
+					clave: * `CPV` - COMPRAVENTA\n  * `CSN` - CESIÓN\n  * `DNC` - DONACIÓN\n  * `HRN` - HERENCIA\n  * `PRM` - PERMUTA\n  * `RST` - RIFA O SORTEO\n  * `STC` - SENTENCIA\n
+						CPV
+						CSN
+						DNC
+						HERN
+						PRM
+						RST
+						STC
+					valor
+					//revisar falta enum[]
+				motivoBaja
+				propiedades
+					clave: * `VNT` - VENTA\n  * `DNC` - DONACIÓN\n  * `SNT` - SINIESTRO\n  * `OTRO` - OTRO(ESPECIFIQUE)\n
+						VNT
+						DNC
+						SNT
+						OTRO
+					valor
+					//revisar falta enum[]
+				tipoVehiculo
+				propiedades
+					clave: * `AUMOT` - AUTOMÓVIL/MOTOCICLETA\n  * `AERN` - AERONAVE\n  * `BARYA` - BARCO/YATE\n  * `OTRO` - OTROS (ESPECIFIQUE)\n
+						AUMOT
+						AERN
+						BARYA
+						OTRO
+					valor
+					//revisar falta enum[]
+				titularBien
+				propiedades
+					clave: * `DEC` - DECLARANTE\n  * `CYG` - CÓNYUGE\n  * `CBN` - CONCUBINA O CONCUBINARIO\n  * `CVV` - CONVIVIENTE\n  * `DEN` - DEPENDIENTE ECONÓMICO\n  * `CTER` - COPROPIEDAD CON TERCEROS\n
+						DEC
+						CYG
+						CBN
+						CVV
+						DEN
+						CTER
+					valor
+					//revisar falta enum[]
+				nivelOrdenGobierno
+					FEDERAL
+					ESTATAL
+					MUNICIPAL_ALCALDIA
+				ambitoPublico
+					EJECUTIVO
+					LEGISLATIVO
+					JUDICIAL
+					ORGANO_AUTONOMO
+				tipoParticipacion
+				propiedades
+					clave: * `SCIO` - SOCIO\n  * `ACCI` - ACCIONISTA\n  * `COMI` - COMISARIO\n  * `REPR` - REPRESENTANTE\n  * `APOD` - APODERADO\n  * `COLB` - COLABORADOR\n  * `BENE` - BENEFICIARIO\n  * `OTRO` - OTROS (ESPECIFIQUE)\n
+						SCIO
+						ACCI
+						COMI
+						REPR
+						APOD
+						COLB
+						BENE
+						OTRO
+					valor
+					//revisar falta enum[]
+					descripción: Seleccionar de la lista desplegable una de las siguientes opciones: socio, accionista, comisario, representante, apoderado, colaborador, beneficiario u otro, especifique.
+				ambitoSector
+				propiedades
+					clave: * `PUB` - Público\n  * `PRV` - Privado\n  * `OTR` - Otro (Especifique).\n
+						PUB
+						PRV
+						OTR
+					valor
+					//revisar falta enum[]
+				lugarDondeReside
+					MEXICO
+					EXTRANJERO
+					SE_DESCONOCE
+				tipoOperacion
+					descripción: Indicar si el elemento fue agregado, modificado, sin cambios o dado de baja
+					AGREGAR
+					MODIFICAR
+					SIN_CAMBIOS
+					BAJA
+				ubicacion
+				propiedades
+					pais
+					entidadFederativa
+				transmisor
+				propiedades
+					tipoPersona
+					nombreRazonSocial
+					rfc
+					relacion
+				tercero
+				propiedades
+					tipoPersona
+					nombreRazonSocial
+					rfc
+				ninguno
+					descripción: Indica que el declarante expresa no tener información relacionada
+				formaPago
+					CREDITO
+					CONTADO
+					NO APLICA
+				otroEmpleoCargoComision
+				propiedades
+					nivelOrdenGobierno
+					ambitoPublico
+					nombreEntePublico
+					areaAdscripcion
+					empleoCargoComision
+					contratadoPorHonorarios
+					nivelEmpleoCargoComision
+					funcionPrincipal
+					fechaTomaPosesion
+					telefonoOficina
+					propiedades
+						telefono
+						extension
+					domicilioMexico
+					domicilioExtranjero
+					aclaracionesObservaciones
+				aclaracionesObservaciones
+					descripción: Aclaraciones/observaciones. En este espacio el Declarante podrá realizar las aclaraciones u observaciones que considere pertinentes respecto de alguno o algunos de los incisos de este apartado.
+			securitySchemes
+				declaraciones_auth
+					password
+						tokenUrl
+						scopes

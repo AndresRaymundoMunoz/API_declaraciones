@@ -1,0 +1,349 @@
+COMPARATIVA DE TODAS LAS ESTRUCTURAS DE TODOS LOS CÓDIGOS RELACIONADOS A LA API
+TODAS LAS ESTRUCTURAS DE CÓDIGO SON JSON
+ESTRUCTURA 1: 
+RAMIFICACIÓN PRIMARIA DE ESTRUCTURA (4 CATEGORÍAS A DESGLOSAR)
+	1) información de la versión de la API //NO PASA A LA SIGUIENTE RAMIFICACIÓN
+	2) "paths"
+	3) "externalDocs" //NO PASA A LA SIGUIENTE RAMIFICACIÓN
+	4) "components" //CON LAS CLAVES DE SEGURIDAD, EN EL CÓDIGO TRABAJADO, LA AUTORIZACIÓN ESTÁ EN LA PARTE FINAL
+RAMIFICACIÓN SECUNDARIA
+	2) i)"/v2/declaraciones"
+	4) i) "securitySchemes"
+	   ii) "schemas"
+RAMIFICACIÓN TERCIARIA (DESGLOCE DE LLENADO DE DECLARACIÓN)
+	2) i) a) "post"
+	4) i) a) "declaraciones_auth"
+           ii) a) "resDeclaraciones"
+               b) "reqDeclaraciones"
+               c) "resError"
+               d) "ordenamiento" //INDICA SI ES ASCENDENTE O DESCENDENTE
+
+
+
+
+
+(DESGLOCE DE LLENADO DE DECLARACIÓN) 
+//INICIO
+               e) "datosGenerales"
+               f) "domicilioDeclarante"
+               g) "datosCurricularesDeclarante"
+               h) "datosEmpleoCargoComision"
+               i) "experienciaLaboral"
+               j) "datosPareja"
+               k) "datosDependientesEconomicos
+               l) "ingresos"
+               m) "actividadAnualAnterior"
+               n) "bienesInmuebles"
+               ñ) "vehiculos"
+               o) "bienesMuebles"
+               p) "inversionesCuentasValores"
+               q) "adeudosPasivos"
+               r) "prestamoComodato"
+               s) "participacion"
+               t) "participacionTomaDecisiones"
+               u) "apoyos"
+               v) "representaciones"
+               w) "clientesPrincipales"
+               x) "beneficiosPrivados"
+               y) "fideicomisos"
+               
+               z) "domicilioMexico" //RAMIFICACIONES: CUATERNARIA, QUINARIA, SENARIA, SEPTENARIA Y OCTONARIA
+               	"type"
+               	"properties"
+               		"calle" //type, example
+               		"numeroExterior" //type, example
+               		"numeroInterior" //type, example
+               		"coloniaLocalidad" //type, example
+               		"municipioAlcaldia"
+               		 	"type"
+               			"properties"
+               				"clave"
+               					"type"
+               					"description"
+       		        			"example"
+       		        			"pattern"
+       		        		"valor"
+       		        			"type"
+       		        			"description"
+       		        			"example"
+       		        "entidadFederativa" //RUTA REFERENCIA DE ESQUEMA
+               		"codigoPostal" //type, example
+               aa) "domicilioExtranjero" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"calle" //type, example
+               		"numeroExterior" //type, example
+               		"numeroInterior" //type, example
+               		"ciudadLocalidad" //type, example
+               		"estadoProvincia" //type, example
+               		"pais" //RUTA REFERENCIA DE ESQUEMA
+               		"codigoPostal" //type, example
+               bb) "tipoPersona" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"
+               cc) "tipoMoneda" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"example"
+               dd) "formaRecepcion" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"
+               ee) "tipoRelacion" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"enum"
+               	"description"
+               	"example"
+               ff) "entidadFederativa" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"example"
+               			"description"
+               			"pattern"
+               		"valor"
+               			"type"
+               			"example"
+               			"description"
+               gg) "país" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"maxLenght"
+               	"description"
+               	"example"
+               hh) "beneficiariosPrograma" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"example"
+               			"enum"
+               			"description"
+               		"valor"
+               			"type"
+               			"example"
+               ii*) "sector" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"example"
+               			"enum"
+               			"description"
+               		"valor"
+               			"type"
+               			"example"
+               jj) "monto" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"valor"
+               			"type"
+               			"example"
+               			"description"
+               		"moneda" //RUTA REFERENCIA DE ESQUEMA
+               kk) "superficie" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"valor"
+               			"type"
+               			"example"
+               		"unidad" //RUTA REFERENCIA DE ESQUEMA
+               ll) "unidadMedida" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"default"
+               	"enum"
+               	"description"
+               mm) "tipoInstrumento" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"description"
+               			"example"
+               		"valor"
+               			"type"
+               			"description"
+               			"example"
+               nn) "tipoInmueble" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"description"
+               			"example"
+               		"valor"
+               			"type"
+               			"example"
+               oo) "parentescoRelacion" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"description"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"description"
+               			"example"
+               		"valor"
+               			"type"
+               			"description"
+               			"example"
+               pp) "actividadLaboral" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"description"
+               			"example"
+               		"valor"
+               			"type"
+               			"example"
+               qq) "formaAdquisicion" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"example"
+               			"description"
+                     		"valor"
+               			"type"
+               			"description"
+               			"example"
+               rr) "motivoBaja" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"example"
+               			"description"
+                     		"valor"
+               			"type"
+               			"description"
+               			"example"
+               ss) "tipoVehículo" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"description"
+               			"example"
+                     		"valor"
+               			"type"
+               			"description"
+               			"example"
+               tt) "titularBien" //RAMIFICACIONES: CUATERNARIA, QUINARIA, SENARIA, Y SEPTENARIA
+               	"type"
+               	"items"
+               		"type"
+               		"properties"
+               			"clave"
+               				"type"
+               				"enum"
+               				"description"
+               				"example"
+             		  		"valor"
+               				"type"
+               				"description"
+               				"example"
+               uu) "nivelOrdenGobierno"//RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"               	
+               vv) "ambitoPublico" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"
+               ww) "tipoParticipacion" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"description"
+               	"properties"
+               		"clave"
+               			"type"
+               			"enum"
+               			"example"
+               			"description"
+               		"valor"
+               			"type"
+               			"example"
+               xx) "ambitoSector" //RAMIFICACIONES: CUATERNARIA, QUINARIA Y SENARIA
+               	"type"
+               	"properties"
+               		"clave"
+               			"type"
+               			"description"
+               			"example"
+               			"enum"
+               		"valor"
+               			"type"
+               			"description"
+               			"example"
+               yy) "lugarDondeReside" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"
+               zz) "tipoOperacion" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"enum"
+               	"example"
+               aaa) "ubicacion" //RAMIFICACIONES: CUATERNARIA Y QUINARIA
+               	"type"
+               	"properties"
+               		"pais" //RUTA REFERENCIA DE ESQUEMA
+               		"entidadFederativa" //RUTA REFERENCIA DE ESQUEMA
+               bbb) "transmisor" //RAMIFICACIONES: CUATERNARIA, QUINARIA, SENARIA, Y SEPTENARIA
+               	"description"
+               	"type"
+               	"items"
+               		"type"
+               		"properties"
+               			"tipoPersona" //RUTA REFERENCIA DE ESQUEMA
+               			"nombreRazonSocial"
+               				"type"
+               				"description"
+               				"example"
+               			"rfc"
+               				"type"
+               				"description"
+               				"example"
+               ccc) "tercero" //RAMIFICACIONES: CUATERNARIA, QUINARIA, SENARIA, Y SEPTENARIA
+               	"type"
+               	"items"
+               		"type"
+               		"properties"
+               			"tipoPersona" //RUTA REFERENCIA DE ESQUEMA
+               			"nombreRazonSocial"
+               				"type"
+               				"description"
+               				"example"
+               			"rfc"
+               				"type"
+               				"description"
+               				"example"
+               ddd) "ninguno" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"example"
+               eee) "formaPago" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"enum"
+               	"example"
+               fff) "aclaracionesObservaciones" //RAMIFICACIÓN CUATERNARIA
+               	"type"
+               	"description"
+               	"example"
+//MODIFICACIÓN DESPUÉS DEL APARTADO "ingresos" NO TIENE EL APARTADO: "actividadAnualAnterior" Y LUEGO DEL APARTADO "formaPago" TIENE UNA SECCIÓN EXTRA: "otroEmpleoCargoComision"
+
+//CONCLUSIÓN E INICIO TIENEN LOS MISMOS APARTADOS, Y NO TIENE EL APARTADO "otroEmpleoCargoComision"                
+	

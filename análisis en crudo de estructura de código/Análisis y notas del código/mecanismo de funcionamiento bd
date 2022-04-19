@@ -1,0 +1,23 @@
+mecanismo de funcionamiento bd.js
+//jala y conecta con la base de datos mysql al código
+
+constante mysql que requiere a la base de datos
+
+constante pool para crear el área de la base de datos mysql
+	host
+	user
+	password
+	database "declarantes_db" //de aquí jala la base de datos
+
+constante mysqlConnection que crea la conectividad
+	host
+	user
+	password
+	database "declarantes_db" //base de datos previamente mencionada 
+
+mysqlConnection.connect
+//función que se encarga de indicar si hay conexión o no y si está conectando
+
+se exportan los módulos de mysqlConnection y pool de la carpeta node_modules
+->node_modules>mysql>lib>protocol> Connection
+				    Pool	

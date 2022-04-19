@@ -1,0 +1,63 @@
+{
+
+"query":{
+"nombres":"a",
+"id":1,
+"hola":"mi",
+"datosEmpleoCargoComision":{
+	"nombreEntePublico":"nasjdkjasdskjdsakj",
+	"entidadFederativa" : "<valor>",
+	"municipioAlcaldia" : "<valor>",
+	"empleoCargoComision" : "<valor>",
+	"nivelOrdenGobierno":"<valor>",
+	"nivelEmpleoCargoComision":"<valor>"
+	
+},
+"bienesInmuebles":{
+	"superficieConstruccion": {"min":"1ads","max":"valor3"},
+	"superficieTerreno": {"min":"1ads","max":"valor3"},
+	"valorAdquisicion": {"min":"1ads","max":"valor3"},
+	"formaAdquisicion":"<valor>"
+	
+},
+"totalIngresosNetos": { "min":"valor","max":"valor"},
+"primerApellido" : "<valor>",
+"segundoApellido" : "<valor>",
+"escolaridadNivel":"<valor>"
+},
+
+
+"sort":{
+	
+"datosEmpleoCargoComision": {
+	"nombreEntePublico":"asc",
+	"entidadFederativa":"asc",
+	"municipioAlcaldia":"asc",
+	"empleoCargoComision":"desc",
+	"nivelEmpleoCargoComision":"desc",
+	"nivelOrdenGobierno":"desc"
+},
+
+"escolaridadNivel":"desc",
+"nombres":"asc",
+"primerApellido":"desc",
+"segundoApellido":"asc",
+"totalIngresosNetos":"desc",
+
+"bienesInmuebles": {
+	"formaAdquisicion":"desc",
+	"superficieConstruccion":"asc",
+	"superficieTerreno":"desc",
+	"valorAdquisicion":"asc"
+}
+},
+
+"oli":[{
+"rolipolioli":"si"	
+},{
+"popooli":"no"	
+}],
+"siiiiu":"best",
+"pageSize":"1"
+
+}

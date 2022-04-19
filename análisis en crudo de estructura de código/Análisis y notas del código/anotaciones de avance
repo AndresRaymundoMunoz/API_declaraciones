@@ -1,0 +1,18 @@
+Líneas de código puestas a manera de propuesta solución a problema emergente de código
+Error: 504
+https://cheatcode.co/tutorials/how-to-set-up-a-websocket-server-with-node-js-and-express
+la solución parcial a este error provoca otro: Error: 1012
+Esta solución fue encontrada para solucionar un error en una api llamada node-binance
+https://github.com/jaggedsoft/node-binance-api/issues/77
+ya pude sincronizar apache server a windows
+mysql implementado también
+falta ponerlo en ubuntu para probarlo
+nssm.exe instalado, aún no funciona correctamente
+jquery para ubuntu
+node_datos con nssm
+
+mysql necesita actualizarse
+problemas para instalar apache2 en ubuntu
+
+
+

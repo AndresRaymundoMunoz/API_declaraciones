@@ -1,0 +1,27 @@
+mecanismo de funcionamiento index.js
+se logguea con la consola
+
+constante express que requiere a express de node_modules
+constante bodyParser que requiere a bodyParser de node_modules
+constante app que se "almacena" en express //esta constante es la que permite el funcionamiento de la api
+
+se extablece el puerto donde va a trabajar //3000
+
+//comandos de uso de api
+se estable el uso de bodyParser tomado de node_modules
+se establece el uso de bodyParser.urlencoded // ubicado aquí: ->node_modules>bodyParser>lib>types>urlencoded
+se establece el uso de express tomado de node_modules
+
+//Rutas
+se establece el uso y por ende conectividad con el archivo consultas.js
+se establece el uso del requerimiento del archivo consultas
+se establece el uso de las variables err, req, res, next //error, request, respuesta, next
+//Middleware que verifica que el objeto en el body sea un JSON válido
+Si el error es una instancia de SyntaxError y el estado del error es igual a 400
+	la consola lanzará en respuesta el estado de respuesta de error
+//Respuesta del servidor
+se obtiene la función req, res
+y se manda la respuesta 
+	'Servidor para declaraimaip corriendo...'
+la aplicación "escucha" y consigue el puerto
+se logguea la consola 'Servidor encendido en el puerto: ' y se consigue el puerto

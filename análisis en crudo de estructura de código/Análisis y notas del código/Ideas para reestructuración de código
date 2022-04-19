@@ -1,0 +1,27 @@
+Ideas para reestructuraciónn de código
+en caso de que lo tenga que volver a hacer
+Se necesitan:
+node_modules
+api-json.json
+bd.js
+config.js
+consultas.js
+estructura-body.json
+index.js //el ejecutable
+init.exe
+package.json // repositorios necesarios
+package-lock.json // bloquea las versiones por si clonan el api
+
+
+nuevas Ideas:{
+    hacer 3 json:{
+        INICIAL
+        MODIFICACION
+        CONCLUSION
+    }
+    el json de MODIFICACION ya está hecho, falta hacer el INICIO e implementarlo de dos formas:{
+        como INICIAL y CONCLUSION tienen los mismos apartados, hacerlo igual
+        hacer INICIAL y CONCLUSION como el de MODIFICACION
+    }
+    hacer funciones de avanzar y retroceder página de cada apartado sin perder información subida
+}
